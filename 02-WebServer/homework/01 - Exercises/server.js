@@ -7,14 +7,13 @@ const PORT = 3001;
 /* ⚠️ LA LÍNEA SIGUIENTE TIENE QUE QUEDAR COMO ESTÁ PARA PODER EXPORTAR EL SERVIDOR ⚠️ */
 module.exports =
   /* AQUÍ DEBAJO YA PUEDES ESCRIBIR TÚ CÓDIGO REEMPLAZANDO EL VALOR DE NULL POR EL SERVIDOR */
-  null;
 
 http.createServer( function(req, res) {
   console.log(`Server raised in port ${PORT}`);
-  if(req.url == "/api") {
-    fs.readFile('./utils/dogsData.json', function(err, data) {
+  if(req.url === '/api') {
+    fs.readFile('./utils/dogsData.json', (err, data) => {
       if (err) {
-        res.writeHead(404, { 'content-type': 'text/plain' });
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('json not found');
       } else {
         res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -23,10 +22,10 @@ http.createServer( function(req, res) {
     });
     return;
   };
-  if(req.url == '/allDogs') {
-    fs.readFile('./utils/allDogs.html', 'UTF8', function(err, data) {
+  if(req.url === '/allDogs') {
+    fs.readFile('./utils/allDogs.html', 'utf8',(err, data) => {
       if (err) {
-        res.writeHead(404, { 'content-type': 'text/plain' });
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('html not found');
       } else {
         res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -34,8 +33,9 @@ http.createServer( function(req, res) {
       };
     });
     return;
-  } else {
-    res.writeHead(404, { 'content-type': 'text/plain' });
+  } 
+  //else {
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
     res.end('Route not found');
-  };
+  //};
 }).listen(PORT, 'localhost');
