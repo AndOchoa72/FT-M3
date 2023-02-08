@@ -1,5 +1,6 @@
 "use strict";
 
+const { promisifiedReadFile } = require("./utils");
 let exerciseUtils = require("./utils");
 
 let args = process.argv.slice(2).map(function (st) {
@@ -20,15 +21,31 @@ args.forEach(function (arg) {
 
 function problemA() {
   // callback version
-  exerciseUtils.readFile("poem-two/stanza-01.txt", function (err, stanza) {
-    exerciseUtils.blue(stanza);
-  });
-  exerciseUtils.readFile("poem-two/stanza-02.txt", function (err, stanza) {
-    exerciseUtils.blue(stanza);
-  });
+  // exerciseUtils.readFile("poem-two/stanza-01.txt", function (err, stanza) {
+  //   exerciseUtils.blue(stanza);
+  // });
+  // exerciseUtils.readFile("poem-two/stanza-02.txt", function (err, stanza) {
+  //   exerciseUtils.blue(stanza);
+  // });
 
   // promise version
   // Tu código acá:
+
+  exerciseUtils.promisifiedReadFile('poem-two/stanza-01.txt')
+  .then(sta1 => {
+    exerciseUtils.blue(sta1);
+    return exerciseUtils.promisifiedReadFile('poem-two/stanza-02.txt')
+  })
+  .then(sta2 => exerciseUtils.blue(sta2)); 
+
+  // {
+  // let p1 = exerciseUtils.promisifiedReadFile('poem-two/stanza-01.txt')
+  // let p2 = exerciseUtils.promisifiedReadFile('poem-two/stanza-02.txt')
+  // Promise.all([p1, p2]).then(([v1, v2]) => {
+  //   exerciseUtils.blue(v1);
+  //   exerciseUtils.blue(v2);
+  // })
+  // }
 }
 
 function problemB() {
@@ -45,6 +62,11 @@ function problemB() {
 
   // promise version
   // Tu código acá:
+
+  filenames.forEach((fn) => {
+    exerciseUtils.promisifiedReadFile(fn)
+      .then(sta => exerciseUtils.blue(sta))
+  })
 }
 
 function problemC() {
@@ -64,6 +86,12 @@ function problemC() {
 
   // promise version
   // Tu código acá:
+  filenames.forEach((fn) => {
+    exerciseUtils.promisifiedReadFile(fn)
+      .then(sta => exerciseUtils.blue(sta))
+      .catch(err => exerciseUtils.magenta(new Error(err)))
+  })
+
 }
 
 function problemD() {

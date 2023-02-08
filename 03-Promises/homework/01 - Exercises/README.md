@@ -93,7 +93,11 @@ npm run test:promises
 
 2. Función problemB:
 
-   a.Vuelve a llamar el método **exerciseUtils.promisifiedReadFile** y pasa como parámetro **poem-one/wrong-file-name.txt** que loguea el error o también puedes loguear **stanza-04.txt**. b.Sin embargo, ten en cuenta los dos caminos en esta promesa: si se resuelve, llama el método **.then** y con la respuesta llama la función **blue**. c. Si no se resuelve, llama el handleError que ejecute la función `magenta` la cual se encuentra en el archivo **utils.js**.
+   a. Vuelve a llamar el método **exerciseUtils.promisifiedReadFile** y pasa como parámetro **poem-one/wrong-file-name.txt** que loguea el error o también puedes loguear **stanza-04.txt**.
+   
+   b. Sin embargo, ten en cuenta los dos caminos en esta promesa: si se resuelve, llama el método **.then** y con la respuesta llama la función **blue**.
+   
+   c. Si no se resuelve, llama el handleError que ejecute la función `magenta` la cual se encuentra en el archivo **utils.js**.
 
    > Hint: En caso de tener que lanzar un error deberías hacerlo con new Error() para que pase los tests correctamente.
 
