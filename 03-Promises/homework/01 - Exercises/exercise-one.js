@@ -30,18 +30,15 @@ function problemA() {
   // promise version
   // Tu código acá:
 
-  exerciseUtils.promisifiedReadFile('poem-one/stanza-02.txt')
-    .then(
-      (sta2) => {
-        exerciseUtils.blue(sta2); 
-        exerciseUtils.promisifiedReadFile('poem-one/stanza-03.txt')
-          .then(
-            (sta3) => {
-              exerciseUtils.blue(sta3); 
-            }
-          )
-        }
-      )
+  exerciseUtils.promisifiedReadFile("poem-one/stanza-02.txt")
+  .then((stanza2) => {
+    exerciseUtils.blue(stanza2)
+    return exerciseUtils.promisifiedReadFile("poem-one/stanza-03.txt") // no usar readFile usar promisifiedReadFile para promesa
+  })
+  .then((stanza3) => {
+    exerciseUtils.blue(stanza3)
+    console.log("done")
+  });
 }
 
 function problemB() {
