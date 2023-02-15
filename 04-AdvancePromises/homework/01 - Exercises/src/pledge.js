@@ -37,14 +37,15 @@ $Promise.prototype._internalReject = function(reason) {
 $Promise.prototype.then = function(successCb, errorCb) {
  	if (typeof successCb !== "function") successCb = false;
 	if (typeof errorCb !== "function") errorCb = false;
-	let downstreamPromise = new
-		$Promise(function(){});
+
+	let downstreamPromise = new $Promise(function(){});
+
 	this._handlerGroups.push({
 					successCb,
 					errorCb,
 					downstreamPromise
 					});
-	if (this._state != _TSPending) { this._callHandlers()};
+	if (this._state !== _TSPending) { this._callHandlers()};
 	return downstreamPromise;
 };
 $Promise.prototype._callHandlers = function() {
@@ -52,25 +53,46 @@ $Promise.prototype._callHandlers = function() {
 		let handlersActuales = this._handlerGroups.shift();
 		if (this._state === _TSFullFilled) {
 			if (!handlersActuales.successCb) {
-				handlersActuales.downstreamPromise._internalResolve(this._value)
+				handlersActuales.downstreamPromise._internalResolve(this._value);
 			} else {
-				const result = handlersActuales.successCb(this._value);
-				if(result instanceof $Promise){
-					return result.then(data => handlersActuales.downstreamPromise._internalResolve(data));
-				} else {
-					handlersActuales.downstreamPromise._internalResolve(result)
+				try {
+					const result = handlersActuales.successCb(this._value);
+					if(result instanceof $Promise){
+						result.then(
+							data => handlersActuales.downstreamPromise._internalResolve(data),
+							err => handlersActuales.downstreamPromise._internalReject(err)
+							);
+					} else {
+						handlersActuales.downstreamPromise._internalResolve(result);
+					}
+				} catch (err) {
+					handlersActuales.downstreamPromise._internalReject(err);
 				}
 			};
-		}; // 1:54:55
-		if (this._state === _TSRejected) {
+		}
+		else { // 1:54:55
 			if (!handlersActuales.errorCb) {
-				handlersActuales.downstreamPromise._internalReject(this._value)
-			} else {handlersActuales.errorCb(this._value)};
+				handlersActuales.downstreamPromise._internalReject(this._value);
+			} else {
+				try {
+					const result = handlersActuales.errorCb(this._value);
+					if(result instanceof $Promise){
+						result.then(
+							data => handlersActuales.downstreamPromise._internalResolve(data),
+							err => handlersActuales.downstreamPromise._internalReject(err)
+							);
+					} else {
+						handlersActuales.downstreamPromise._internalResolve(result);
+					}
+				} catch (err) {
+					handlersActuales.downstreamPromise._internalReject(err);
+				}
+			};
 		};		
 	}; 
 };
 $Promise.prototype.catch = function(catchFn) {
-	this.then(null, catchFn);	
+	return this.then(null, catchFn);	
 };
    
 module.exports = $Promise;
