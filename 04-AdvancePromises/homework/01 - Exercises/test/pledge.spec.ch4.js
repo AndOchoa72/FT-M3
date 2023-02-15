@@ -12,7 +12,6 @@ describe('Chapter 4: Promise Chaining y Transformación', function(){
                               888
                               888
 
-
 Capítulo 4: Las Promises pueden retornar valores y conectarse entre ellas
 ---------------------------------------------------------*/
 // Un aspecto crucial de las promises es que `.then` siempre

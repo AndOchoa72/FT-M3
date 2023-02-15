@@ -37,24 +37,40 @@ $Promise.prototype._internalReject = function(reason) {
 $Promise.prototype.then = function(successCb, errorCb) {
  	if (typeof successCb !== "function") successCb = false;
 	if (typeof errorCb !== "function") errorCb = false;
+	let downstreamPromise = new
+		$Promise(function(){});
 	this._handlerGroups.push({
 					successCb,
-					errorCb
+					errorCb,
+					downstreamPromise
 					});
 	if (this._state != _TSPending) { this._callHandlers()};
+	return downstreamPromise;
 };
 $Promise.prototype._callHandlers = function() {
 	while (this._handlerGroups.length > 0) {
 		let handlersActuales = this._handlerGroups.shift();
-		let successCb = handlersActuales.successCb;
-		let errorCb = handlersActuales.errorCb;
-		if (this._state == _TSFullFilled) {
-			if (successCb !== false) successCb(this._value);
-		};
-		if (this._state == _TSRejected) {
-			if (errorCb !== false) errorCb(this._value);
+		if (this._state === _TSFullFilled) {
+			if (!handlersActuales.successCb) {
+				handlersActuales.downstreamPromise._internalResolve(this._value)
+			} else {
+				const result = handlersActuales.successCb(this._value);
+				if(result instanceof $Promise){
+					return result.then(data => handlersActuales.downstreamPromise._internalResolve(data));
+				} else {
+					handlersActuales.downstreamPromise._internalResolve(result)
+				}
+			};
+		}; // 1:54:55
+		if (this._state === _TSRejected) {
+			if (!handlersActuales.errorCb) {
+				handlersActuales.downstreamPromise._internalReject(this._value)
+			} else {handlersActuales.errorCb(this._value)};
 		};		
 	}; 
+};
+$Promise.prototype.catch = function(catchFn) {
+	this.then(null, catchFn);	
 };
    
 module.exports = $Promise;

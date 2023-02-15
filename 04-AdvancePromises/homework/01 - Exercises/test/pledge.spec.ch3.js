@@ -12,7 +12,6 @@ describe('Capítulo 3: Rejection Callback Attachment', function(){
                         Y88b  d88P
                          "Y8888P"
 
-
 Capítulo 3: Completando los Handlers: Rejection & Catch
 ---------------------------------------------------------*/
 // Con `.resolve` enviando y `.then` actuando en data, tenemos

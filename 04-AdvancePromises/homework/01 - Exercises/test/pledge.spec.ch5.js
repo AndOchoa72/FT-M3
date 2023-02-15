@@ -12,7 +12,6 @@ describe('Capítulo 5: Métodos estáticos `.resolve` y `.all`', function(){
                         Y88b  d88P
                          "Y8888P
 
-
 Capítulo 5: Credito Extra: Métodos estáticos `.resolve` y `.all`
 ---------------------------------------------------------*/
 // Promises por si mismo tiene muchas ventajas sobre callbacks,
