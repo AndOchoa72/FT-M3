@@ -1,0 +1,173 @@
+async function asyncfunction() {};
+
+const asyncfunction = async () => {};
+
+
+const urls = [
+    "https://rickandmorty.com/api/character",
+    "https://rickandmorty.com/api/character",
+    "https://rickandmorty.com/api/character",
+    "https://rickandmorty.com/api/character",
+    "https://rickandmorty.com/api/character",
+    ];
+const promises = urls.map((url) => axios.get(url));
+Promise.all(promises).then((res) =>
+    res.foreach((obj) => console.log(obj.data))
+    );
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+let stanza = await exerciseUtils.promisifiedReadFile("poem-one/stanza-01.txt")
+  exerciseUtils.blue(stanza);
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+const stanza2 = await exerciseUtils.promisifiedReadFile("poem-one/stanza-02.txt")
+  exerciseUtils.blue(stanza2);
+  const stanza3 = await exerciseUtils.promisifiedReadFile("poem-one/stanza-03.txt")
+  exerciseUtils.blue(stanza3);
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+const stanza2 = await exerciseUtils.promisifiedReadFile("poem-one/stanza-02.txt")
+  exerciseUtils.blue(stanza2);
+  const stanza3 = await exerciseUtils.promisifiedReadFile("poem-one/stanza-03.txt")
+  exerciseUtils.blue(stanza3);
+  console.log('done');
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+try {
+    const stanza4 = await exerciseUtils.promisifiedReadFile("poem-one/wrong-file-name.txt")
+    exerciseUtils.blue(stanza4)
+  } catch (err) {
+    exerciseUtils.magenta(err); // exerciseUtils.magenta(new Error(err))
+  };
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+try {
+    const stanza3 = await exerciseUtils.promisifiedReadFile("poem-one/stanza-03.txt")
+    exerciseUtils.blue(stanza3);
+    const stanza4 = await exerciseUtils.promisifiedReadFile("poem-one/wrong-file-name.txt")
+    exerciseUtils.blue(stanza4);
+  } catch (err) {
+    exerciseUtils.magenta(err)
+  };
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+const stanzas = await Promise
+    .all([exerciseUtils.promisifiedReadFile("poem-two/stanza-01.txt"),
+    exerciseUtils.promisifiedReadFile("poem-two/stanza-02.txt")]);
+  stanzas.forEach((s) => exerciseUtils.blue(s));
+  console.log("done");
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+const stanzas = await Promise
+    .all([exerciseUtils.promisifiedReadFile("poem-two/stanza-01.txt"),
+    exerciseUtils.promisifiedReadFile("poem-two/stanza-02.txt")]);
+  stanzas.forEach((s) => exerciseUtils.blue(s));
+  console.log("done");
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+const promises = await Promise
+    .all(filenames.map((f) => exerciseUtils.promisifiedReadFile(f)))
+  for (const promise of promises) { exerciseUtils.blue(promise) };
+  console.log("done");
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+problemC
+
+for (const file of filenames) {
+    const stanza = await exerciseUtils.promisifiedReadFile(file)
+    exerciseUtils.blue(stanza)
+  };
+  console.log("done");
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+problemD:
+
+try {
+    for (const file of filenames) {
+      const stanza = await exerciseUtils.promisifiedReadFile(file)
+      exerciseUtils.blue(stanza);
+    }
+  } catch (err) {
+    exerciseUtils.magenta(err);
+  } finally {
+    console.log("done");
+  };
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+RyM: getFavorite:
+
+const getFavorite = async function (req, res) {
+    try {
+        const favs = await favs.findAll();
+        return res.status(200).json(favs);
+    } catch (error) {
+        return res.status(500).json(error);
+    };
+};
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+RyM: postFavorite:
+
+const postFavorite = function (req, res) {
+    try {
+        if (req.body) {
+            const favs = favs.push(req.body);
+            return res.status(200).json(req.body)
+        };
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+};
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+RyM: deleteFav:
+
+const deleteFav = (req, res) => {
+  const { id } = req.params;
+  const character = fav.find((f) => f.id === Number(id));
+
+  if (character) {
+
+    fav = fav.filter(f => f !== character)
+    //console.log("log de favoritos delete", fav);
+    res.status(200).json(character);
+  } else {
+    res.status(400).json({
+      error: "not found this character",
+    });
+  }
+};
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
+
+

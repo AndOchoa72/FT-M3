@@ -14,5 +14,8 @@
     "async": "^3.2.3",
     "chalk": "^4.1.0",
     "jest": "^29.3.1"
+  },
+  "devDependencies": {
+    "colors": "^1.4.0"
   }
 }
