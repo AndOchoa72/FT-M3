@@ -1,5 +1,5 @@
 "use strict";
-const colors = require("colors");
+//const colors = require("colors");
 
 let exerciseUtils = require("./utils");
 let eU = exerciseUtils;
@@ -80,12 +80,20 @@ async function problemC() {
     return "poem-two/" + "stanza-0" + n + ".txt";
   });
 
+//  console.log('Entramos en ProblemC'.bgMagenta);
+//  for (file of filenames) {console.log(file)};
   // callback version
-  filenames.forEach((filename) => {
-    exerciseUtils.readFile(filename, function (err, stanza) {
-      exerciseUtils.blue(stanza);
-    });
-  });
+//  filenames.forEach((filename) => {
+//    exerciseUtils.readFile(filename, function (err, stanza) {
+//      exerciseUtils.blue(stanza);
+//    });
+//  });
+  for (const file of filenames) {
+    const stanza = await exerciseUtils.promisifiedReadFile(file)
+    exerciseUtils.blue(stanza)
+  };
+  console.log("done");
+//  console.log('Salimos de ProblemC'.bgMagenta);
 }
 
   // async await version
@@ -99,12 +107,26 @@ async function problemD() {
   filenames[randIdx] = "wrong-file-name-" + (randIdx + 1) + ".txt";
 
   // callback version
-  filenames.forEach((filename) => {
-    exerciseUtils.readFile(filename, function (err, stanza) {
+  // filenames.forEach((filename) => {
+  //   exerciseUtils.readFile(filename, function (err, stanza) {
+  //     exerciseUtils.blue(stanza);
+  //     if (err) exerciseUtils.magenta(new Error(err));
+  //   });
+  // });
+
+//  console.log('Entramos en ProblemD'.bgGreen);
+  // async await version
+  try {
+    for (const file of filenames) {
+      const stanza = await exerciseUtils.promisifiedReadFile(file)
       exerciseUtils.blue(stanza);
-      if (err) exerciseUtils.magenta(new Error(err));
-    });
-  });
+    }
+  } catch (err) {
+    exerciseUtils.magenta(err);
+  } finally {
+    console.log("done");
+  };
+
 }
 
   // async await version
